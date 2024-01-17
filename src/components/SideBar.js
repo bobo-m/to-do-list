@@ -2,6 +2,7 @@ import Profile from './Profile';
 import  ListItem  from './ListItem';
 import './SideBar.css';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 
 function SideBar (){
@@ -29,13 +30,15 @@ function SideBar (){
                         count={0}
                     />
                 </li> 
-               <li className="summary-allTasks">
-                    <ListItem
-                        icon='all-tasks'
-                        title='All Tasks'
-                        count={0}
-                    />
-                </li>
+                <Link to='all-tasks'>
+                    <li className="summary-allTasks">
+                        <ListItem
+                            icon='all-tasks'
+                            title='All Tasks'
+                            count={0}
+                        />
+                    </li>
+                </Link>
                 <li className="summary-myCalender">
                     <ListItem
                         icon='my-calender'

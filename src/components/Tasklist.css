@@ -1,0 +1,16 @@
+.tasklists{
+    width: 40%;
+    height: 70%;
+    background-color: black;
+    padding: 15px;
+    color: white;
+    border-radius: 15px;
+    box-sizing: border-box;
+    overflow: scroll;
+}
+.tasklist{
+    cursor: pointer;
+}
+.tasklist:hover .tasktitle-heading{
+    color: rgb(27, 126, 240);
+}

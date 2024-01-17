@@ -1,0 +1,21 @@
+.tasktitle-heading{
+    font-weight: 500;
+    margin: 0;
+    padding: 10px 10px 10px;
+    font-size: 18px;
+}
+
+.tasks{
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s;
+}
+
+.tasks > div{
+    overflow: hidden;
+}
+
+.tasks.open{
+    display: grid;
+    grid-template-rows: 1fr;
+}

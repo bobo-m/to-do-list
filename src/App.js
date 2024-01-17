@@ -1,12 +1,15 @@
 import SideBar from './components/SideBar';
-import Tasklist from './components/Tasklist';
+// import Tasklist from './components/Tasklist';
 import './App.css';
+import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
     <div className="App">
       <SideBar/>
-      <Tasklist/>
+      <main id='main'>
+        <Outlet/>      
+      </main>
     </div>
   );
 }

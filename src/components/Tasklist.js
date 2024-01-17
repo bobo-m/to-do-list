@@ -1,19 +1,20 @@
 import './Tasklist.css';
+import Tasktitle from './Tasktitle';
 
 export default function Tasklist(){
     return(
-        <div className="tasklist">
-            <div className="tasks today">
-                <h3>Today</h3>
+        <div className="tasklists">
+            <div className='tasklist tasklist-today'>
+                <Tasktitle name='today' />
             </div>
-            <div className="tasks tomorrow">
-                <h3>Tomorrow</h3>
+            <div className="tasklist tasklist-tomorrow">
+                <Tasktitle name='tomorrow' />
             </div>
-            <div className="tasks upcoming">
-                <h3>Upcoming</h3>
+            <div className="tasklist tasklist-upcoming">
+                <Tasktitle name='upcoming' />
             </div>
-            <div className="tasks someday">
-                <h3>Someday</h3>
+            <div className="tasklist tasklist-someday">
+                <Tasktitle name='someday' />
             </div>
         </div>
     )
