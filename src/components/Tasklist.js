@@ -1,8 +1,10 @@
+import { Outlet } from 'react-router-dom';
 import './Tasklist.css';
 import Tasktitle from './Tasktitle';
 
 export default function Tasklist(){
     return(
+        <>
         <div className="tasklists">
             <div className='tasklist tasklist-today'>
                 <Tasktitle name='today' />
@@ -17,5 +19,7 @@ export default function Tasklist(){
                 <Tasktitle name='someday' />
             </div>
         </div>
+        <Outlet/>
+        </>
     )
 }

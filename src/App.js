@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       <SideBar/>
       <main id='main'>
-        <Outlet/>      
+        <Outlet/>          
       </main>
     </div>
   );
