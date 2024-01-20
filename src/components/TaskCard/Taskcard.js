@@ -1,6 +1,13 @@
-import './Taskcard.css'
+import './Taskcard.css';
+import tasksData from '../../tasks';
 
-function Taskcard(){
+
+function Taskcard({task}){
+    const task = tasksData.map((iterator)=>{
+        if(iterator.id === task.id){
+            return iterator;
+        }
+    })
     return (
         <div className="taskcard">
             <div className="taskcard-trail"></div>

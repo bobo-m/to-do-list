@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Tasklist from './components/Tasklist';
 import Taskcard from './components/Taskcard';
+import tasksData from './tasks';
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
     children:[
       {
         path: 'all-tasks',
-        element: <Tasklist/>,
+        element: <Tasklist tasks={tasksData}/>,
         children: [
           {
             path: ':task',
