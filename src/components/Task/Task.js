@@ -1,9 +1,9 @@
 import './Task.css';
 import { Link } from 'react-router-dom';
 
-function Task({name, isDone}){
+function Task({name, id, isDone}){
     return(
-        <Link to={`${name.toLowerCase().replace(/\s+/g, '-')}`}>
+        <Link to={`${id}`}>
             <div className="task">
             <button className="checkbox">
                 

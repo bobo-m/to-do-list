@@ -1,6 +1,7 @@
 import Task from '../Task/Task';
-import './Tasktitle.css';
+import './TaskTitle.css';
 import { useState } from 'react';
+import { v1 as uuid } from 'uuid';
 
 function Tasktitle({name , tasks}){
     const [tasksOpen, toggleTasksOpen] = useState(false);
@@ -16,7 +17,8 @@ function Tasktitle({name , tasks}){
             <div>
             {tasks.map((task)=>(
                 <Task
-                    key={task.id}
+                    key={uuid()}
+                    id={task.id}
                     name={task.task}
                     isDone={false}
                 />

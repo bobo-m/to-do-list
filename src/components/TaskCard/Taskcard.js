@@ -1,23 +1,21 @@
-import './Taskcard.css';
+import './TaskCard.css';
 import tasksData from '../../tasks';
+import { useParams } from 'react-router-dom';
 
 
-function Taskcard({task}){
-    const task = tasksData.map((iterator)=>{
-        if(iterator.id === task.id){
-            return iterator;
-        }
-    })
+function TaskCard(){
+    const { taskId } = useParams();
+    const  singleTask = tasksData.find((iterator)=>Number(taskId) ===iterator.id)
     return (
         <div className="taskcard">
-            <div className="taskcard-trail"></div>
-            <div className="name"></div>
+            <div className="taskcard-trail">{singleTask.list}</div>
+            <div className="name">{singleTask.task}</div>
             <div className="bubbles"></div>
-            <div className="notes"></div>
+            <div className="notes">{singleTask.notes}</div>
             <div className="subtasks"></div>
             <div className="attachments"></div>
         </div>
     )
 }
 
-export default Taskcard;
+export default TaskCard;

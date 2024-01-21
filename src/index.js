@@ -4,8 +4,8 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Tasklist from './components/Tasklist';
-import Taskcard from './components/Taskcard';
+import TaskList from './components/TaskList/TaskList';
+import TaskCard from './components/TaskCard/TaskCard';
 import tasksData from './tasks';
 
 const router = createBrowserRouter([
@@ -15,11 +15,11 @@ const router = createBrowserRouter([
     children:[
       {
         path: 'all-tasks',
-        element: <Tasklist tasks={tasksData}/>,
+        element: <TaskList tasks={tasksData}/>,
         children: [
           {
-            path: ':task',
-            element: <Taskcard/>
+            path: ':taskId',
+            element: <TaskCard/>
           }
         ]
       }

@@ -1,5 +1,5 @@
-import Profile from './Profile';
-import  ListItem  from './ListItem';
+import Profile from '../Profile/Profile';
+import  ListItem  from '../ListItem/ListItem';
 import './SideBar.css';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';

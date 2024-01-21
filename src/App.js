@@ -1,4 +1,4 @@
-import SideBar from './components/SideBar';
+import SideBar from './components/SideBar/SideBar';
 // import Tasklist from './components/Tasklist';
 import './App.css';
 import { Outlet } from 'react-router-dom';

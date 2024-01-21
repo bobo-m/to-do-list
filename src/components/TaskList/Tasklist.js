@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import './Tasklist.css';
-import Tasktitle from '../TaskTitle/Tasktitle';
+import './TaskList.css';
+import TaskTitle from '../TaskTitle/TaskTitle';
 
-export default function Tasklist({ tasks }){
+export default function TaskList({ tasks }){
     const {today , tomorrow, upcoming, someday}= tasks.reduce(
         (acc, task)=>{
             switch(task.timeline){
@@ -29,16 +29,16 @@ export default function Tasklist({ tasks }){
         <>
         <div className="tasklists">
             <div className='tasklist tasklist-today'>
-                <Tasktitle name='today' tasks={today}/>
+                <TaskTitle name='today' tasks={today}/>
             </div>
             <div className="tasklist tasklist-tomorrow">
-                <Tasktitle name='tomorrow' tasks={tomorrow}/>
+                <TaskTitle name='tomorrow' tasks={tomorrow}/>
             </div>
             <div className="tasklist tasklist-upcoming">
-                <Tasktitle name='upcoming' tasks={upcoming}/>
+                <TaskTitle name='upcoming' tasks={upcoming}/>
             </div>
             <div className="tasklist tasklist-someday">
-                <Tasktitle name='someday' tasks={someday}/>
+                <TaskTitle name='someday' tasks={someday}/>
             </div>
         </div>
         <Outlet/>
