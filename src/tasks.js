@@ -6,7 +6,10 @@ const tasksData = [
     "deadline": "2024-02-01",
     "list": "Work",
     "notes": "Review client requirements before starting",
-    "subtasks": ["Research competitors", "Draft project outline"],
+    "subtasks": [
+      {"id": 101, "task": "Research competitors"},
+      {"id": 102, "task": "Draft project outline"}
+    ],
     "timeline": "Upcoming"
   },
   {
@@ -16,7 +19,10 @@ const tasksData = [
     "deadline": "2024-01-25",
     "list": "Work",
     "notes": "Check for urgent messages first",
-    "subtasks": ["Reply to client inquiries", "Organize inbox"],
+    "subtasks": [
+      {"id": 201, "task": "Reply to client inquiries"},
+      {"id": 202, "task": "Organize inbox"}
+    ],
     "timeline": "Today"
   },
   {
@@ -26,7 +32,10 @@ const tasksData = [
     "deadline": "2024-01-30",
     "list": "Work",
     "notes": "Include visual aids for better engagement",
-    "subtasks": ["Gather data", "Create slide templates"],
+    "subtasks": [
+      {"id": 301, "task": "Gather data"},
+      {"id": 302, "task": "Create slide templates"}
+    ],
     "timeline": "Upcoming"
   },
   {
@@ -46,7 +55,10 @@ const tasksData = [
     "deadline": "2024-02-10",
     "list": "Work",
     "notes": "Refer to coding guidelines",
-    "subtasks": ["Write unit tests", "Optimize code"],
+    "subtasks": [
+      {"id": 501, "task": "Write unit tests"},
+      {"id": 502, "task": "Optimize code"}
+    ],
     "timeline": "Upcoming"
   },
   {
@@ -86,7 +98,10 @@ const tasksData = [
     "deadline": "2024-02-05",
     "list": "Work",
     "notes": "Highlight recent achievements",
-    "subtasks": ["Update work experience", "Add new skills"],
+    "subtasks": [
+      {"id": 901, "task": "Update work experience"},
+      {"id": 902, "task": "Add new skills"}
+    ],
     "timeline": "Upcoming"
   },
   {
@@ -96,9 +111,13 @@ const tasksData = [
     "deadline": null,
     "list": "Personal",
     "notes": "Consider outdoor and indoor options",
-    "subtasks": ["Check weather forecast", "Invite friends"],
+    "subtasks": [
+      {"id": 1001, "task": "Check weather forecast"},
+      {"id": 1002, "task": "Invite friends"}
+    ],
     "timeline": "Someday"
   }
 ]
+
   
 export default tasksData;

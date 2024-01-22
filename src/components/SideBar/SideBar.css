@@ -7,7 +7,7 @@
     height: 100vh;
     background-color: rgba(0,0,0);
     color: white;
-    transition: width 0.5s linear;
+    transition: width 0.5s linear, background-color 0.5s linear;
 }
 .collapsed{
     width: 10%;

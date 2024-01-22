@@ -3,5 +3,52 @@
     height: 80%;
     background-color: black;
     border-radius: 15px;
+    padding: 15px;
+    box-sizing: border-box;
     color: white;
+}
+.taskcard .taskcard-trail{
+    padding: 0 10px;
+    font-size: 12px;
+}
+.taskcard .name{
+    font-size: 22px;
+    font-weight: 500;
+    padding: 10px;
+}
+.taskcard .bubbles{
+    padding: 10px;
+}
+.taskcard .notes {
+    padding: 10px;
+}
+.taskcard .notes input{
+    width: 100%;
+    height: 30px;
+    font-family: 'Poppins', sans-serif;
+    border-radius: 5px;
+    padding: 0 10px;
+    border: none;
+    box-sizing: border-box;
+    background-color: black;
+    color: white;
+}
+.taskcard .notes input:hover{
+    color:black;
+    background-color: rgb(88, 87, 87);
+}
+.taskcard .notes input:focus{
+    color:black;
+    background-color: rgb(88, 87, 87);
+    outline: none;
+}
+.taskcard .notes h5 {
+    letter-spacing: 2px;
+    font-weight: 400;
+    padding: 0 0 10px 0;
+    margin: 0;
+}
+.task-description .task-description-text{
+    margin: 0;
+    padding: 0;
 }

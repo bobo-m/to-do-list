@@ -6,6 +6,7 @@
     align-items: center;
     border-radius: 10px;
     font-size: 15px;
+    position: relative;
 }
 .task:hover{
     background-color: rgb(88, 87, 87);
@@ -18,7 +19,27 @@
     background-color: black;
     border: 2px solid white;
     cursor: pointer;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .task .task-description{
     margin: 0;
+    display: flex;
+    align-items: center;
+}
+.isChecked{
+    width: 0;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    height: 2px;
+    background-color: white;
+    z-index: 1;
+    transition: width 0.5s linear;
+}
+
+.isChecked.isChecked--true{
+    width:80%;
 }

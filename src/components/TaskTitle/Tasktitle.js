@@ -3,8 +3,8 @@ import './TaskTitle.css';
 import { useState } from 'react';
 import { v1 as uuid } from 'uuid';
 
-function Tasktitle({name , tasks}){
-    const [tasksOpen, toggleTasksOpen] = useState(false);
+function Tasktitle({name , tasks, isOpen}){
+    const [tasksOpen, toggleTasksOpen] = useState(isOpen);
     const toggleShowTasks=()=>{
         toggleTasksOpen(!tasksOpen);
     }
