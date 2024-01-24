@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import './TaskList.css';
 import TaskTitle from '../TaskTitle/TaskTitle';
+import AddTask from '../AddTask/AddTask';
 
 export default function TaskList({ tasks }){
     const {today , tomorrow, upcoming, someday}= tasks.reduce(
@@ -27,18 +28,23 @@ export default function TaskList({ tasks }){
     )
     return(
         <>
-        <div className="tasklists">
-            <div className='tasklist tasklist-today'>
-                <TaskTitle name='today' tasks={today}/>
+        <div className='tasklists-wrapper'>
+            <div className="tasklists">
+                <div className='tasklist tasklist-today'>
+                    <TaskTitle name='today' tasks={today}/>
+                </div>
+                <div className="tasklist tasklist-tomorrow">
+                    <TaskTitle name='tomorrow' tasks={tomorrow}/>
+                </div>
+                <div className="tasklist tasklist-upcoming">
+                    <TaskTitle name='upcoming' tasks={upcoming}/>
+                </div>
+                <div className="tasklist tasklist-someday">
+                    <TaskTitle name='someday' tasks={someday}/>
+                </div>
             </div>
-            <div className="tasklist tasklist-tomorrow">
-                <TaskTitle name='tomorrow' tasks={tomorrow}/>
-            </div>
-            <div className="tasklist tasklist-upcoming">
-                <TaskTitle name='upcoming' tasks={upcoming}/>
-            </div>
-            <div className="tasklist tasklist-someday">
-                <TaskTitle name='someday' tasks={someday}/>
+            <div className="addtask-container">
+                <AddTask />
             </div>
         </div>
         <Outlet/>

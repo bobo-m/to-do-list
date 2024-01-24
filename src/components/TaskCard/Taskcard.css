@@ -15,6 +15,19 @@
     font-size: 22px;
     font-weight: 500;
     padding: 10px;
+    width: 100%;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: black;
+    border: none;
+    color: white;
+}
+.taskcard .name:hover{
+    background-color: rgb(88, 87, 87);
+}
+.taskcard .name:focus{
+    background-color: rgb(88, 87, 87);
+    outline: none;
 }
 .taskcard .bubbles{
     padding: 10px;
@@ -32,6 +45,9 @@
     box-sizing: border-box;
     background-color: black;
     color: white;
+}
+.taskcard .notes input::placeholder{
+    font-style: italic;
 }
 .taskcard .notes input:hover{
     color:black;
@@ -51,4 +67,11 @@
 .task-description .task-description-text{
     margin: 0;
     padding: 0;
+}
+.taskcard .subtasks h5 {
+    padding: 0 10px;
+    margin: 0;
+    letter-spacing: 2px;
+    font-weight: 400;
+    text-transform: uppercase;
 }

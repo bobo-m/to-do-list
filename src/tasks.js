@@ -44,7 +44,7 @@ const tasksData = [
     "priority": "Low",
     "deadline": "2024-01-22",
     "list": "Work",
-    "notes": "Discuss project updates and challenges",
+    "notes": "",
     "subtasks": null,
     "timeline": "Today"
   },

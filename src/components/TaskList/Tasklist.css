@@ -1,16 +1,37 @@
-.tasklists{
-    width: 40%;
+.tasklists-wrapper{
+    width: 45%;
     height: 80%;
+    border-radius: 15px;
     background-color: black;
+    position: relative;
+}
+.tasklists{
+    width: 100%;
+    height: 100%;
     padding: 15px;
     color: white;
-    border-radius: 15px;
     box-sizing: border-box;
     overflow: scroll;
+    display: flex;
+    flex-direction: column;
 }
 .tasklist{
     cursor: pointer;
 }
 .tasklist:hover .tasktitle-heading{
     color: rgb(27, 126, 240);
+}
+.addtask-container{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: auto;
+    min-height: 60px;
+    background-color: rgb(37, 37, 37);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px;
 }

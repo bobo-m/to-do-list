@@ -5,8 +5,12 @@ import { v1 as uuid } from 'uuid';
 
 function Tasktitle({name , tasks, isOpen}){
     const [tasksOpen, toggleTasksOpen] = useState(isOpen);
+    const [taskState , setTasks] = useState(tasks);
     const toggleShowTasks=()=>{
         toggleTasksOpen(!tasksOpen);
+    }
+    const handleRemove = (id) =>{
+        setTasks(taskState.filter((task)=>task.id !== id))
     }
     return (
         <>
@@ -15,12 +19,13 @@ function Tasktitle({name , tasks, isOpen}){
         </h3>
         <div className={`tasks ${tasksOpen ? 'open' : ''}`}>
             <div>
-            {tasks.map((task)=>(
+            {taskState.map((task)=>(
                 <Task
                     key={uuid()}
                     id={task.id}
                     name={task.task}
                     isDone={false}
+                    removeTask={handleRemove}
                 />
             ))}
             </div>
