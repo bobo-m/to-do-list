@@ -1,7 +1,7 @@
 .sidebar{
     width: 18%;
     display: flex;
-    font-family: 'Poppin', sans-serif;
+    font-family: 'Poppins', sans-serif;
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;

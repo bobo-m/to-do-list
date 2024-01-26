@@ -76,7 +76,7 @@ export default function TaskList({ tasks }){
                 <AddTask handleAddTask={addTask}/>
             </div>
         </div>
-        <Outlet/>
+        <Outlet context={[taskList]}/>
         </>
     )
 }
