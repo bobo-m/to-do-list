@@ -1,0 +1,30 @@
+.category-container{
+    display: flex;
+    height: 3rem;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+.category-container:hover{
+    background-color: rgb(88, 87, 87);
+}
+.category-icon{
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.category-title{
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+}
+.category-icon-image{
+    width: 100%;
+}
