@@ -1,34 +1,53 @@
 import { useState } from 'react';
-import { StateValue } from '../../StateProvider';
+import { StateValue } from '../../context/StateProvider';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import axios from 'axios';
 import { v1 as uuid } from 'uuid';
 import './NewSubTask.css';
 
 export default function NewSubTask({parentTask, setSubtaskInputOpen}){
-    //check if component getting the right prop
     //eslint-disable-next-line
     const [state, dispatch] = StateValue();
     const[subtask, setSubtask] = useState('');
     const[focused, toggleFocused] = useState(false);
+    const { user } = useAuthContext();
 
     const handleSubmit=async (e)=>{
         if(e.key === 'Enter'){
+            if(!user){
+                return;
+            };
+
             const newSubtask = {
                 id : uuid(),
-                task: subtask
+                title: subtask,
+                isDone: false
             }
-            await axios.put('/api/tasks/subtasks',{
-                parentTask: parentTask.id,
-                subtask: newSubtask
-            })
-            dispatch({
-                type: 'addSubtask',
-                parentTask: parentTask.id,
-                subtask: newSubtask
-            })
-            // addNewSubtask(subtask);
-            setSubtask('');
-            setSubtaskInputOpen(false);
+            try {
+                await axios.put('/api/tasks/subtasks',{
+                    parentTaskId: parentTask.id,
+                    subtask: newSubtask
+                },{
+                    headers: {
+                        Authorization: `Bearer ${user.token}`
+                    }
+                });
+
+                dispatch({
+                    type: 'addSubtask',
+                    parentTaskId: parentTask.id,
+                    subtask: newSubtask
+                });
+
+                setSubtask('');
+                setSubtaskInputOpen(false);
+            } catch (error) {
+                if(error.response){
+                    console.log(error.response.data);
+                }else{
+                    console.log('Error: ', error);
+                };
+            }
         }else return
     }
 

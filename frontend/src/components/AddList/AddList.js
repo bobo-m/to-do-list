@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './AddList.css'
-import { StateValue } from '../../StateProvider'
+import { StateValue } from '../../context/StateProvider'
 import { v1 as uuid } from 'uuid'
 
 const AddList = ({ closeAddList }) => {

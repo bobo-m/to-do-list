@@ -1,18 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { StateProvider } from './StateProvider';
+import { StateProvider } from './context/StateProvider';
+import { AuthContextProvider } from './context/AuthContext';
 import reducer, { initialState } from './Reducer';
 import reportWebVitals from './reportWebVitals';
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
-  // <React.StrictMode>
-    <StateProvider reducer={reducer} initialState={initialState}>
-      <App/>
-    </StateProvider>
-  // </React.StrictMode> 
+  <React.StrictMode>
+    <AuthContextProvider >
+      <StateProvider reducer={reducer} initialState={initialState}>
+        <App/>
+      </StateProvider>
+    </AuthContextProvider>  
+  </React.StrictMode> 
 );
 
 // If you want to start measuring performance in your app, pass a function

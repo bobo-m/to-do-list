@@ -1,5 +1,5 @@
 import {v1 as uuid} from 'uuid'
-import { StateValue } from '../../StateProvider';
+import { StateValue } from '../../context/StateProvider';
 import AddTask from '../AddTask/AddTask';
 import Task from '../Task/Task';
 import './DayTaskList.css'
@@ -12,7 +12,6 @@ const DayTaskList = ({ date, optional, day, tasks }) => {
             type: 'addTask',
             task: {
                 ...task,
-                deadline: date
             }
         })
     }
@@ -28,14 +27,14 @@ const DayTaskList = ({ date, optional, day, tasks }) => {
             {tasks.map((task)=>(
                 <Task
                     key={uuid()}
-                    name={task.task}
+                    name={task.title}
                     id={task.id}
                     isDone={task.isDone ? task.isDone :false}
                     removeTask={removeTask}
                 />
                 
             ))}
-            <AddTask  handleAddTask={addTask}/>
+            <AddTask  handleAddTask={addTask} date={date}/>
         </div>
     )
 }

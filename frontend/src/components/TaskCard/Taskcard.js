@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react';
 import SubTask from '../SubTask/SubTask';
 import AddSubTask from '../AddSubTask/AddSubTask'
 import NewSubTask from '../NewSubTask/NewSubTask';
-import { StateValue } from '../../StateProvider';
+import { StateValue } from '../../context/StateProvider';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import axios from 'axios';
 
 function TaskCard(){
     const { taskId } = useParams();
     const [{tasks: tasksData}, dispatch] = StateValue(); 
+    const { user } = useAuthContext();
     // eslint-disable-next-line
     const singleTask = tasksData.find((iterator)=> taskId == iterator.id) 
         || tasksData.find((task)=> task.timeline==='Today') 
@@ -18,7 +20,7 @@ function TaskCard(){
         || tasksData.find((task)=> task.timeline==='Someday')
 
     const defaultNotes = singleTask?.notes || '';
-    const defaultTitle = singleTask?.task || '';
+    const defaultTitle = singleTask?.title || '';
     const defaultSubTasks = singleTask?.subtasks || [];
     
     const [notes, setNotes] = useState(defaultNotes);
@@ -29,43 +31,76 @@ function TaskCard(){
 
     useEffect(()=>{
         setNotes((prevNotes) => singleTask?.notes || prevNotes);
-        setTitle((prevTitle) => singleTask?.task || prevTitle);
+        setTitle((prevTitle) => singleTask?.title || prevTitle);
         setSubTasks((prevSubTasks) => singleTask?.subtasks || prevSubTasks)
     },[singleTask])
 
     const editNotes = async (val)=>{
-        setNotes(val);
-        
-        await axios.put('/api/tasks/notes', {
-            id: singleTask.id,
-            notes: val
-        })
+        if(!user){
+            return;
+        };
 
-        dispatch({
-            type: 'editTaskNotes',
-            task: {
+        try {
+            await axios.put('/api/tasks/notes', {
                 id: singleTask.id,
                 notes: val
-            }
-        })
-    }
+            },{
+                headers: {
+                    Authorization: `Bearer ${user.token}`
+                }
+            });
+            
+            dispatch({
+                type: 'editTaskNotes',
+                task: {
+                    id: singleTask.id,
+                    notes: val
+                }
+            });
+
+            setNotes(val);
+        } catch (error) {
+            if(error.response){
+                console.log(error.response.data);
+            }else{
+                console.log('Error: ', error);
+            };
+        };
+    };
 
     const editTitle = async (val)=>{
-        setTitle(val);
+        if(!user){
+            return;
+        };
 
-        await axios.put('/api/tasks/task', {
-            id: singleTask.id,
-            task: val
-        })
+        try {
+            await axios.put('/api/tasks/title', {
+                id: singleTask.id,
+                title: val
+            },{
+                headers: {
+                    Authorization: `Bearer ${user.token}`
+                }
+            });
+    
+            dispatch({
+                type: 'editTaskTitle',
+                task: {
+                    title: val,
+                    id: singleTask.id
+                }
+            });
+            
+            setTitle(val);
+        } catch (error) {
+            if(error.response){
+                console.log(error.response.data);
+            }else{
+                console.log('Error: ', error);
+            };
+        };
+    };
 
-        dispatch({
-            type: 'editTaskTitle',
-            task: {
-                task: val,
-                id: singleTask.id
-            }
-        })
-    }
     const handleRemoveSubtask = (subId) =>{
         dispatch({
             type: 'removeSubtask',
@@ -88,7 +123,7 @@ function TaskCard(){
 
             <div className="notes">
                 <h5>NOTES</h5>
-                <input type="text" placeholder='Insert your notes here' onChange={(e)=>editNotes(e.target.value)} value={notes}/>                
+                <textarea type="text" placeholder='Insert your notes here' onChange={(e)=>editNotes(e.target.value)} value={notes}/>                
             </div>
 
             

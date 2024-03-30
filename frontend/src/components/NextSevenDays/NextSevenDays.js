@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useState } from 'react'
 import Header from '../Header/Header'
 import DayTaskList from '../DayTaskList/DayTaskList';
-import { StateValue } from '../../StateProvider'
+import { StateValue } from '../../context/StateProvider'
 import { parse, differenceInCalendarDays } from 'date-fns';
 import './NextSevenDays.css';
+import { Outlet } from 'react-router-dom';
 
 const NextSevenDays = () => {
     // eslint-disable-next-line
@@ -37,7 +38,6 @@ const NextSevenDays = () => {
                     const deadline = parse(task.deadline, 'yyyy-MM-dd', new Date())
                     const dateOffset = differenceInCalendarDays(deadline, dateToday)
                     if(dateOffset < 7){
-                        console.log(dateOffset, task.deadline)
                         acc[daysMap.get(deadline.getDay())].tasks.push(task)
                     }
                 }
@@ -59,7 +59,6 @@ const NextSevenDays = () => {
             const newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate()+daysOffset);
             categorized[daysMap.get(key)].date = `${newDate.getFullYear()}-${newDate.getMonth()+1}-${newDate.getDate()}`
         }
-        console.log(categorized)
         setCategorizedTasks(categorized)
         },[date, daysMap, tasks]
     )
@@ -78,6 +77,7 @@ const NextSevenDays = () => {
                     />
                 ))}
             </div>
+            <Outlet/>
         </div>
     );    
 }

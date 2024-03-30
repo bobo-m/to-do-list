@@ -3,7 +3,7 @@ import './TaskList.css';
 import TaskTitle from '../TaskTitle/TaskTitle';
 import AddTask from '../AddTask/AddTask';
 import { useEffect, useState } from 'react';
-import { StateValue } from '../../StateProvider';
+import { StateValue } from '../../context/StateProvider';
 import Header from '../Header/Header';
 
 export default function TaskList(){
@@ -43,7 +43,6 @@ export default function TaskList(){
     },[taskList])
 
     const addTask = (task) => {
-        console.log(task)
         dispatch({
             type: 'addTask',
             task: task

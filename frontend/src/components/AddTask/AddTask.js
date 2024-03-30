@@ -1,5 +1,6 @@
 import { ReactComponent as MyListIcon } from '../../images/all-tasks.svg';
 import { useEffect, useState } from 'react';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import axios from 'axios';
 import { v1 as uuid } from 'uuid';
 import { format } from 'date-fns'
@@ -7,14 +8,16 @@ import TagIcon from '@mui/icons-material/Tag';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
+import { parse, isToday, isTomorrow, isThisMonth } from 'date-fns';
 import './AddTask.css'
 
-function AddTask({ handleAddTask }){
-    const [task, setTask] = useState('')
+function AddTask({ handleAddTask , date}){
+    const [title, setTitle] = useState('')
     const [focused, setFocused] = useState(false);
     const [showOptions, setShowOptions] = useState(false);
     const [showListSelect, setShowListSelect] = useState(false);
-    const [selectedList, setSelectedList] = useState('')
+    const [selectedList, setSelectedList] = useState('');
+    const { user } = useAuthContext();
 
     const handleWindowClick=(e)=>{
         const addTaskElement = document.querySelector('.addtask-container');
@@ -41,7 +44,7 @@ function AddTask({ handleAddTask }){
         setShowListSelect(!showListSelect);
     }
     const handleChange = (e) =>{
-        setTask(e.target.value)
+        setTitle(e.target.value)
     }
     const addTask = (e) =>{
 
@@ -50,22 +53,47 @@ function AddTask({ handleAddTask }){
         }        
     }
     const dispatchAddTask= async ()=>{
+        if(!user){
+            return;
+        }
+
         const id = uuid();
-        const deadline = format(Date.now(), 'yyyy-MM-dd');
+        const deadline = date? date :format(Date.now(), 'yyyy-MM-dd');
+        const parsedDate = parse(deadline, 'yyyy-MM-dd', new Date()) ;  
         const newTask = {
             id:id,
-            task: task,
+            title: title,
             list: selectedList ? selectedList : 'Personal',
-            timeline: "Today",
+            timeline: 
+                date ? 
+                    isThisMonth(parsedDate) ?
+                        isTomorrow(parsedDate) || isToday(parsedDate)? 
+                            isTomorrow(parsedDate)? 
+                            'Tomorrow' : 
+                            'Today' :
+                        'Upcoming' : 
+                    'Someday': 
+                'Today',
             deadline: deadline,
             notes: '',
-            priority: "Medium",
-            subtasks: null,  
+            subtasks: [],  
             isDone: false
         }
-        await axios.post('/api/tasks', { newTask: newTask })
-        handleAddTask(newTask)
-        setTask('');
+        try {
+            await axios.post('/api/tasks', { task: newTask }, {
+                headers:{
+                    Authorization: `Bearer ${user.token}`
+                }
+            })
+            handleAddTask(newTask)
+            setTitle('');
+        } catch (error) {
+            if(error.response){
+                console.log(error.response.data);
+            }else{
+                console.log(error);
+            }
+        }
     }
     return(
         <div className='addtask-container'>
@@ -112,7 +140,7 @@ function AddTask({ handleAddTask }){
                     type="text" 
                     placeholder='Add Task' 
                     className="addtask-input" 
-                    value={task}/>
+                    value={title}/>
                 {focused &&
                     <div className="submit-icon" onClick={dispatchAddTask}>
                         <ArrowUpwardIcon/>

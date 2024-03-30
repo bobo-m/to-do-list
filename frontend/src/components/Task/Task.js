@@ -4,49 +4,82 @@ import { useNavigate } from 'react-router-dom';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { StateValue } from '../../StateProvider';
+import { StateValue } from '../../context/StateProvider';
+import { useAuthContext } from '../../hooks/useAuthContext';
 import axios from 'axios';
 
 function Task({name, id, isDone, removeTask}){
     const navigate = useNavigate();
 
     // eslint-disable-next-line
-    const [tasks, dispatch] = StateValue()
-    const [done, setDone] = useState(isDone)
-    const [menuOpen, toggleMenu] = useState(false)
+    const [tasks, dispatch] = StateValue();
+    const [done, setDone] = useState(isDone);
+    const [menuOpen, toggleMenu] = useState(false);
+    const { user } = useAuthContext();
+
     const handleClick = async (e) =>{
         e.stopPropagation();
-        dispatch({
-            type: 'setTaskDone',
-            id: id,
-            isDone: isDone
-        })
-        await axios.put('/api/tasks/done', {
-            id: id,
-            isDone : !done
-        })
-        setDone(!done);
-    }
+        if(!user){
+            return;
+        }
+        try {
+            await axios.put('/api/tasks/done', {
+                id: id,
+                isDone : !done
+            },{
+                headers:{
+                    Authorization: `Bearer ${user.token}`
+                }
+            });
+            
+            dispatch({
+                type: 'setTaskDone',
+                id: id,
+                isDone: isDone
+            });
+
+            setDone(!done);
+        } catch (error) {
+            if(error.response){
+                console.log(error.response.data);
+            }else{
+                console.log('Error: ', error);
+            };
+        };
+    };
     const handleRemove = async (id) =>{
-        await axios.delete('/api/tasks',{
-            headers: {
-                "Content-Type": "application/json"
-            },
-            data: {
-                id: id
-            }
-        })
-        removeTask(id)
-    }
+        if(!user){
+            return;
+        };
+        try {
+            await axios.delete('/api/tasks',{
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${user.token}`
+                },
+                data: {
+                    id: id
+                }
+            });
+            
+            removeTask(id);
+        } catch (error) {
+            if(error.response){
+                console.log(error.response.data);
+            }else{
+                console.log('Error: ', error);
+            };
+        };
+    };
     const handleUtility = (e) =>{
-        e.preventDefault();
+        e.stopPropagation();
         done ? handleRemove(id) : openUtilityMenu();
     }
     const openUtilityMenu = () =>{
         toggleMenu(!menuOpen);
     }
     const showTask = () =>{
-        navigate(`/all-tasks/${id}`)
+        navigate(`./${id}`)
     }
     return(        
         <div className={`task ${done? 'done': ''}`} onClick={showTask}>

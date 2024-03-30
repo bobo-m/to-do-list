@@ -1,4 +1,4 @@
-import { StateValue } from '../../StateProvider';
+import { StateValue } from '../../context/StateProvider';
 import Task from '../Task/Task';
 import './TaskTitle.css';
 import { useEffect, useState } from 'react';
@@ -12,7 +12,8 @@ function Tasktitle({name , tasks, isOpen}){
 
     useEffect(()=>{
         setTasks(tasks);
-    },[tasks])
+    },[tasks, setTasks])
+    
     const toggleShowTasks=()=>{
         toggleTasksOpen(!tasksOpen);
     }
@@ -33,7 +34,7 @@ function Tasktitle({name , tasks, isOpen}){
                 <Task
                     key={uuid()}
                     id={task.id}
-                    name={task.task}
+                    name={task.title}
                     isDone={task.isDone? task.isDone : false}
                     removeTask={handleRemove}
                 />

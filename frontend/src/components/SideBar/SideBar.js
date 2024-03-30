@@ -6,7 +6,7 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './SideBar.css';
-import { StateValue } from '../../StateProvider';
+import { StateValue } from '../../context/StateProvider';
 
 
 function SideBar (){
@@ -28,13 +28,15 @@ function SideBar (){
             />
             {isSidebarOpen && <>
             <ul className='summary'>
-                <li className="summary-myDay">
-                    <ListItem
-                        icon='my-day'
-                        title='My Day'
-                        count={0}
-                    />
-                </li>
+                <Link to='my-day'>
+                    <li className="summary-myDay">
+                        <ListItem
+                            icon='my-day'
+                            title='My Day'
+                            count={0}
+                        />
+                    </li>
+                </Link>
                 <Link to='next-seven-days'>
                     <li className="summary-next7Days">
                         <ListItem

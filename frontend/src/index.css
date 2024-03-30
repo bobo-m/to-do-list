@@ -1,0 +1,6 @@
+:root{
+    --primary-color: #000000;
+    --gray-hover: rgb(88, 87, 87);
+    --gray-translucent: rgba(0, 0, 0, 0.884);
+    --background-image: url('../../images/bg.jpg');
+}

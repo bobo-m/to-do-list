@@ -6,7 +6,7 @@ export const initialState = {
 
 const reducer = (state, action) =>{
 switch(action.type){
-    case 'setData':
+    case 'SET_DATA':
         return{
             ...state,
             tasks: action.tasks,
@@ -15,7 +15,7 @@ switch(action.type){
     case 'addTask':
         const task = {
             id: action.task.id,
-            task: action.task.task,
+            title: action.task.title,
             timeline: action.task.timeline,
             deadline: action.task.deadline,
             list : action.task.list,
@@ -62,7 +62,7 @@ switch(action.type){
                 ...state.tasks
             ]
 
-            updatedTasks[taskIndex].task = action.task.task 
+            updatedTasks[taskIndex].title = action.task.title
 
             return {
                 ...state,
@@ -75,8 +75,8 @@ switch(action.type){
     
     case 'addSubtask':
     
-        if(action.parentTask){
-            const parentIndex = state.tasks.findIndex((task)=> task.id === action.parentTask)
+        if(action.parentTaskId){
+            const parentIndex = state.tasks.findIndex((task)=> task.id === action.parentTaskId)
         
         
         if(parentIndex !== -1){
@@ -84,16 +84,15 @@ switch(action.type){
 
             const subtask = {
                 id: action.subtask.id,
-                task: action.subtask.task
+                title: action.subtask.title
             }
             const newParentTask = {
                 ...parentTask,
                 subtasks: [...parentTask.subtasks , subtask]
             }
 
-            const updatedTasks = [...state.tasks]
-            updatedTasks[parentIndex] = newParentTask
-        
+            const updatedTasks = [...state.tasks];
+            updatedTasks[parentIndex] = newParentTask;
         
             return{
                 ...state,
@@ -117,7 +116,7 @@ switch(action.type){
 
                 updatedSubTasks[subtaskIndex] = {
                     id: action.subtask.id,
-                    task: action.subtask.task
+                    title: action.subtask.task
                 }
 
                 const updatedTasks = [

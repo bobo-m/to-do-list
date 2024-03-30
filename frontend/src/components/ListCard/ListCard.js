@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { StateValue } from '../../StateProvider'
+import { StateValue } from '../../context/StateProvider'
 import Task from '../Task/Task'
 import './ListCard.css'
 import { Outlet, useParams } from 'react-router-dom'
