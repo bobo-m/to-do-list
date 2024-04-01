@@ -102,6 +102,7 @@ function TaskCard(){
     };
 
     const handleRemoveSubtask = (subId) =>{
+        console.log(singleTask.id, subId);
         dispatch({
             type: 'removeSubtask',
             id: subId,

@@ -19,7 +19,7 @@ switch(action.type){
             timeline: action.task.timeline,
             deadline: action.task.deadline,
             list : action.task.list,
-            subtasks: null,
+            subtasks: [],
             notes: ''
         }
             return {
@@ -139,12 +139,19 @@ switch(action.type){
             ...state
         }
 
+
     case 'removeSubtask':
         if(action.id){
+            console.log(action);
             const updatedTasks = [...state.tasks]
             const parentIndex = updatedTasks.findIndex((task)=>task.id===action.parentTask)
+            console.log(parentIndex);
             const subtaskIndex = updatedTasks[parentIndex].subtasks.findIndex((task)=>task.id===action.id)
-            updatedTasks[parentIndex].subtasks.splice(subtaskIndex,1)
+            console.log(updatedTasks[parentIndex].subtasks);
+            if(subtaskIndex !== -1){
+                updatedTasks[parentIndex].subtasks.splice(subtaskIndex,1)
+            }
+            console.log(updatedTasks[parentIndex].subtasks);
     
             return{
                 ...state,

@@ -6,7 +6,7 @@ import CheckCircle from '@mui/icons-material/CheckCircle';
 import Cancel from '@mui/icons-material/Cancel';
 import './SubTask.css';
 
-export default function Subtask({parentTask, subtask, isDone, removeSubtask}){
+export default function Subtask({parentTask, subtask, removeSubtask}){
     // eslint-disable-next-line
     const [state, dispatch] = StateValue();
     const [done, setDone] = useState(subtask.isDone);
@@ -38,14 +38,6 @@ export default function Subtask({parentTask, subtask, isDone, removeSubtask}){
                     Authorization: `Bearer ${user.token}`
                 }
             });
-            dispatch({
-                type: 'editSubtask',
-                subtask:{
-                    id: subtask.id,
-                    title: title,
-                    parentTask: parentTask.id
-                }
-            });
             setDone(!done);
         } catch (error) {
             if(error.response){
@@ -60,6 +52,8 @@ export default function Subtask({parentTask, subtask, isDone, removeSubtask}){
             return;
         };
 
+        console.log(id)
+
         try {
             await axios.delete('/api/tasks/subtasks', {
                 headers: {
@@ -69,7 +63,6 @@ export default function Subtask({parentTask, subtask, isDone, removeSubtask}){
                     parentTaskId: parentTask.id,
                     subtaskId: id
                 }
-            },{
             });
             removeSubtask(id);
         } catch (error) {
