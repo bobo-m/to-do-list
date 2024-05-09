@@ -15,13 +15,14 @@ export const Auth = async (req, res, next) =>{
     try {
         // Split the header to get the token
         const token = authorization.split(' ')[1];
-
+        
         // Verify the jwt token to get the id 
         const { _id } = jwt.verify(token, process.env.SECRET);
-
+        
         // Find the user in the db and get the user id
         const user = await User.findOne({_id}).select('_id');
-
+        
+        console.log(token,user)
         // Set a property on the request to the user id
         req.user = user;
 
