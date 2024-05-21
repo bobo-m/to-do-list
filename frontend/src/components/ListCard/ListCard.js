@@ -45,7 +45,7 @@ function ListCard () {
                     <Task
                         key={task.id}
                         id={task.id}
-                        name={task.title}
+                        name={task.task}
                         isDone={task.isDone ? task.isDone : false}
                         removeTask={handleRemove}
                     />

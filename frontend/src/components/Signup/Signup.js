@@ -6,39 +6,17 @@ import './Signup.css'
 const Signup = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
     const { signup, error, isLoading } = useSignUp();
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
         console.log(email,password);
-        await signup(firstName, lastName, email, password);
+        await signup(email, password);
     }
     return (
         <div className="signupWrapper">
             <form className="signup" onSubmit={(e)=>handleSubmit(e)}>
                 <h1>Sign Up</h1>
-                <div className="firstNameWrapper">
-                    <label>Enter First Name *</label>
-                    <input 
-                        className='firstName' 
-                        type="text" 
-                        value={firstName} 
-                        placeholder="First Name" 
-                        onChange={(e)=>setFirstName(e.target.value)} 
-                    />
-                </div>
-                <div className="lastNameWrapper">
-                    <label>Enter Last Name</label>
-                    <input 
-                        className='lastName' 
-                        type="text" 
-                        value={lastName} 
-                        placeholder="LastName" 
-                        onChange={(e)=>setLastName(e.target.value)} 
-                    />
-                </div>
                 <div className="emailWrapper">
                     <label>Enter Email</label>
                     <input 
@@ -50,7 +28,7 @@ const Signup = () => {
                     />
                 </div>
                 <div className="passwordWrapper">
-                    <label>Enter Password *</label>
+                    <label>Enter Password</label>
                     <input 
                         className='password' 
                         type="password" 

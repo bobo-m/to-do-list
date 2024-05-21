@@ -28,16 +28,16 @@
     text-align: center;
 }
 
-.passwordWrapper, .emailWrapper, .firstNameWrapper, .lastNameWrapper{
+.passwordWrapper, .emailWrapper{
     display: flex;
     flex-direction: column;
     width: 100%;
     margin: 10px 0;
 }
-.firstName label, .lastName label,.passwordWrapper label, .emailWrapper label{
+.passwordWrapper label, .emailWrapper label{
     margin: 10px 0;
 }
-.firstName ,.lastName ,.password, .email{
+.password, .email{
     width: 100%;
     padding: 10px;
 

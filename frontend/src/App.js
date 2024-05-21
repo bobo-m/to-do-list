@@ -44,7 +44,6 @@ export default function App(){
       };
     };
     if(user){
-      console.log(user)
       fetchTasks();
     }
   },[dispatch, user])
