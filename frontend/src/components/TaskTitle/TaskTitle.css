@@ -13,7 +13,7 @@
 
 .tasks > div{
     overflow: hidden;
-}
+} 
 
 .tasks.open{
     display: grid;

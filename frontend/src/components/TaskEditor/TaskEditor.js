@@ -1,7 +1,5 @@
-import CloseIcon from '@mui/icons-material/Close';
 import TaskCard from '../TaskCard/Taskcard';
 import './TaskEditor.css';
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const TaskEditor = () =>{

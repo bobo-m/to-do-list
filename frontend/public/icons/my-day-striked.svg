@@ -1,0 +1,28 @@
+<svg 
+xmlns="http://www.w3.org/2000/svg"
+width="24"
+height="24"
+fill="none"
+viewBox="0 0 24 24"
+>
+  <mask id="svg-3834966953-__a" width="24" height="23" x="-4" y="5" maskUnits="userSpaceOnUse" style="mask-type: alpha;">
+    <path fill="white" d="m5.5 5-9.5.5 4.5 17L17 28l2.5-9-14-14Z" />
+  </mask>
+
+  <g stroke="white" stroke-width="1.4" mask="url(#svg-3834966953-__a)">
+    <circle r="9" transform="matrix(1 0 0 -1 12 12)" />
+    <path d="M17 12a5 5 0 1 0-10 0 5 5 0 0 0 10 0Z" />
+  </g>
+
+  <path stroke="white" stroke-linecap="round" stroke-width="1.5" d="M3.06 3 21 20.94" />
+
+  <mask id="svg-3834966953-__b" width="25" height="25" x="6" y="-7" maskUnits="userSpaceOnUse" style="mask-type: alpha;">
+    <path fill="#C4C4C4" d="M16.156-6.409 30.729 8.165l-9.298 9.298L6.857 2.89z" />
+  </mask>
+
+  <g stroke="white" stroke-width="1.4" mask="url(#svg-3834966953-__b)">
+    <circle r="9" transform="matrix(1 0 0 -1 12 12)" />
+    <path d="M17 12a5 5 0 1 0-10 0 5 5 0 0 0 10 0Z" />
+    <circle r="2" transform="matrix(1 0 0 -1 12 12)" />
+  </g>
+</svg>

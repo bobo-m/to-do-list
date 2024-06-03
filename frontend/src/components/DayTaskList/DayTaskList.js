@@ -27,9 +27,7 @@ const DayTaskList = ({ date, optional, day, tasks }) => {
             {tasks.map((task)=>(
                 <Task
                     key={uuid()}
-                    name={task.title}
-                    id={task.id}
-                    isDone={task.isDone ? task.isDone :false}
+                    task={task}
                     removeTask={removeTask}
                 />
                 

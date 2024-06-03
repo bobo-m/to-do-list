@@ -26,6 +26,7 @@ userSchema.statics.signup = async function(email, password){
         throw new Error('Email is not valid');
     };
     const exists = await this.findOne({ email:email });
+    console.log(exists)
     
     if(exists){
         throw new  Error('Email already in use');

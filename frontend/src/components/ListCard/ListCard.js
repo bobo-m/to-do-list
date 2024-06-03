@@ -44,9 +44,7 @@ function ListCard () {
                 {tasks.map((task)=>(
                     <Task
                         key={task.id}
-                        id={task.id}
-                        name={task.task}
-                        isDone={task.isDone ? task.isDone : false}
+                        task={task}
                         removeTask={handleRemove}
                     />
                 ))}

@@ -5,6 +5,7 @@ import AddTask from '../AddTask/AddTask';
 import { useEffect, useState } from 'react';
 import { StateValue } from '../../context/StateProvider';
 import Header from '../Header/Header';
+import { differenceInCalendarDays, isToday, isTomorrow } from 'date-fns';
 
 export default function TaskList(){
     // eslint-disable-next-line
@@ -19,21 +20,15 @@ export default function TaskList(){
     useEffect(()=>{
         const categorized = taskList.reduce(
             (acc, task)=>{
-                switch(task.timeline){
-                    case 'Today':
-                        acc.today.push(task);
-                        break;
-                    case'Tomorrow':
-                        acc.tomorrow.push(task);
-                        break;
-                    case 'Someday':
-                        acc.someday.push(task);
-                        break;
-                    case 'Upcoming':
-                        acc.upcoming.push(task);
-                        break;
-                    default:
-                        break;
+                const date = task.deadline;
+                if(isToday(date)){
+                    acc.today.push(task);
+                }else if(isTomorrow(date)){
+                    acc.tomorrow.push(task);
+                }else if(differenceInCalendarDays(date, new Date()) < 7 && differenceInCalendarDays(date, new Date()) > 0){
+                    acc.upcoming.push(task);
+                }else{
+                    acc.someday.push(task);
                 }
                 return acc;
             },
@@ -46,7 +41,7 @@ export default function TaskList(){
         dispatch({
             type: 'addTask',
             task: task
-        })
+        });
     }
 
     return(
@@ -68,7 +63,7 @@ export default function TaskList(){
                         <TaskTitle name='someday' tasks={categorizedTasks.someday}/>
                     </div>
                 </div>
-                <AddTask handleAddTask={addTask}/> 
+                <AddTask handleAddTask={addTask} myDay={false}/> 
             </div>
             <Outlet context={taskList}/>
         </div>

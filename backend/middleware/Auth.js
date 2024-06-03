@@ -6,7 +6,7 @@ export const Auth = async (req, res, next) =>{
 
     // get the authorization header from the headers
     const { authorization } = req.headers;
-    
+
     // If the authorization header does not exist send back an error
     if(!authorization){
         return res.status(401).json({ error: 'Authorization token required' });
@@ -28,6 +28,7 @@ export const Auth = async (req, res, next) =>{
         // Pass the control to the next middleware
         next();
     } catch (error) {
+        console.log(error);
         // Send error back if some error is encountered
         res.status(401).json({ error: 'Request is not authorized'});
     };

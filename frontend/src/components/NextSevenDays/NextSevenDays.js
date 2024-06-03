@@ -31,11 +31,11 @@ const NextSevenDays = () => {
     const date = useMemo(()=>new Date(),[]);
 
     useEffect(() => {
-        const dateToday = new Date()
+        const dateToday = new Date();
         const categorized = tasks.reduce(
             (acc, task)=>{
                 if(task.deadline){    
-                    const deadline = parse(task.deadline, 'yyyy-MM-dd', new Date())
+                    const deadline = new Date(task.deadline);
                     const dateOffset = differenceInCalendarDays(deadline, dateToday)
                     if(dateOffset < 7){
                         acc[daysMap.get(deadline.getDay())].tasks.push(task)

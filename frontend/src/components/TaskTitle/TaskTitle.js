@@ -33,9 +33,7 @@ function Tasktitle({name , tasks, isOpen}){
             {taskState.map((task)=>(
                 <Task
                     key={uuid()}
-                    id={task.id}
-                    name={task.title}
-                    isDone={task.isDone? task.isDone : false}
+                    task={task}
                     removeTask={handleRemove}
                 />
             ))}

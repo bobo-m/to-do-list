@@ -12,11 +12,7 @@ const taskSchema = new schema({
         required: true
     },
     deadline:{
-        type: String,
-        required: true
-    },
-    timeline:{
-        type: String,
+        type: Date,
         required: true
     },
     isDone:{
@@ -37,6 +33,14 @@ const taskSchema = new schema({
     },
     user_id:{
         type: String,
+        required: true
+    },
+    myDay:{
+        type: Boolean,
+        required:true
+    },
+    tags:{
+        type: Array,
         required: true
     }
 },{collection: 'tasks'});

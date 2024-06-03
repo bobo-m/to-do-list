@@ -55,7 +55,13 @@ export default function App(){
       children:[
         {
           path: 'my-day',
-          element: <MyDay/>
+          element: <MyDay/>,
+          children: [
+            {
+              path: ':taskId',
+              element: <TaskEditor/>
+            }
+          ]
         },
         {
           path: 'all-tasks',

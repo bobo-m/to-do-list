@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import { taskRoutes } from './routes/tasks.js';
 import { subtaskRoutes } from './routes/subtasks.js';
 import { userRoutes } from './routes/user.js';
+import { Db } from 'mongodb';
 
 const port = process.env.PORT || 5000;
 

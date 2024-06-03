@@ -10,17 +10,20 @@ import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 import { parse, isToday, isTomorrow, isThisMonth } from 'date-fns';
 import './AddTask.css'
+import { StateValue } from '../../context/StateProvider'
 
-function AddTask({ handleAddTask , date}){
+function AddTask({ handleAddTask , date, myDay}){
     const [title, setTitle] = useState('')
     const [focused, setFocused] = useState(false);
     const [showOptions, setShowOptions] = useState(false);
     const [showListSelect, setShowListSelect] = useState(false);
     const [selectedList, setSelectedList] = useState('');
     const { user } = useAuthContext();
+    const [{lists}] = StateValue();
 
     const handleWindowClick=(e)=>{
         const addTaskElement = document.querySelector('.addtask-container');
+
         if(addTaskElement && !addTaskElement.contains(e.target)){
             setFocused(false);
             setShowListSelect(false)
@@ -52,6 +55,10 @@ function AddTask({ handleAddTask , date}){
             dispatchAddTask();
         }        
     }
+    const selectList = (listName) =>{
+        setSelectedList(listName);
+        setShowListSelect(false);
+    }
     const dispatchAddTask= async ()=>{
         if(!user){
             return;
@@ -64,20 +71,12 @@ function AddTask({ handleAddTask , date}){
             id:id,
             title: title,
             list: selectedList ? selectedList : 'Personal',
-            timeline: 
-                date ? 
-                    isThisMonth(parsedDate) ?
-                        isTomorrow(parsedDate) || isToday(parsedDate)? 
-                            isTomorrow(parsedDate)? 
-                            'Tomorrow' : 
-                            'Today' :
-                        'Upcoming' : 
-                    'Someday': 
-                'Today',
-            deadline: deadline,
+            deadline: new Date(deadline),
             notes: '',
             subtasks: [],  
-            isDone: false
+            isDone: false,
+            myDay: myDay,
+            tags: [],
         }
         try {
             await axios.post('/api/tasks', { task: newTask }, {
@@ -100,15 +99,13 @@ function AddTask({ handleAddTask , date}){
         {showListSelect && 
             <div className="select-mylists">
                 <ul >
-                    <li>
-                        <button onClick={()=>setSelectedList('Personal')} value={'Personal'}>Personal</button>
-                    </li>
-                    <li>
-                        <button onClick={()=>setSelectedList('Work')} value='Work'>Work</button>
-                    </li>
-                    <li>
-                        <button onClick={()=>setSelectedList('Grocery List')} value='Grocery List'>Grocery List</button>
-                    </li>
+                    {lists.map((l, index)=>(
+                        <li key={index} onClick={()=>selectList(l.name)}>
+                            <button value={l.name}>
+                                {l.name}
+                            </button>
+                        </li>
+                    ))}
                 </ul>
             </div>
         }

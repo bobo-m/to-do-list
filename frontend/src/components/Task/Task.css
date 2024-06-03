@@ -64,3 +64,62 @@
 .task:hover .task-utility{
     background-color: rgb(88, 87, 87);
 }
+
+.task .popperWrapper{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    z-index: 4;
+}
+
+.task .optionsDropdown{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(44, 44, 44);
+    border-radius: 5px;
+}
+.task .optionsDropdown ul{
+    margin: 0;
+}
+.task .optionsDropdown button{
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+}
+.task .optionsDropdown li:first-of-type button{
+    border-radius: 5px 5px 0 0;
+}
+.task .optionsDropdown li:last-of-type button{
+    border-radius: 0 0 5px 5px;
+}   
+.task .optionsDropdown svg{
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    fill: white;
+    padding: 0;
+    margin: 0 5px 0 0;
+}
+.task .optionsDropdown img{
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    padding: 0;
+    margin: 0 5px 0 0;
+}
+.task .optionsDropdown button:hover{
+    background-color: rgb(88, 87, 87);
+}

@@ -56,13 +56,6 @@ function SideBar (){
                         />
                     </li>
                 </Link>
-                <li className="summary-myCalender">
-                    <ListItem
-                        icon='my-calender'
-                        title='My Calender'
-                        count={0}
-                    />
-                </li>
             </ul>
             <ul className="myLists">
                 <li id='myLists-heading'>

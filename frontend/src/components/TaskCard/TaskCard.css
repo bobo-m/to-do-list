@@ -1,7 +1,7 @@
 .taskcard{
     width: 50%;
     height: 100%;
-    background-color: black;
+    background-color: #161616;
     border-radius: 15px;
     padding: 15px;
     box-sizing: border-box;
@@ -19,7 +19,7 @@
     width: 100%;
     border-radius: 5px;
     box-sizing: border-box;
-    background-color: black;
+    background-color: #161616;
     border: none;
     color: white;
 }
@@ -46,7 +46,7 @@
     padding: 0 10px;
     border: none;
     box-sizing: border-box;
-    background-color: black;
+    background-color: #161616;
     color: white;
 }
 .taskcard .notes textarea::placeholder{
@@ -77,4 +77,51 @@
     letter-spacing: 2px;
     font-weight: 400;
     text-transform: uppercase;
+}
+.bubbles{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.bubbles button{
+    background-color: #252525;
+    border: none;
+    border-radius: 40px;
+    padding: 5px 10px;
+    margin: 0 10px 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    cursor: pointer;
+}
+
+.tagBubbles{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.tagBubbles.nextLine{
+    width: 100%;
+}
+
+.tagBubbles .tag{
+    padding: 2px 10px;
+}
+
+.tagBubbles > svg:hover{
+    color: #0083ff !important;
+}
+
+.tagBubbles > svg{
+    width: 25px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+.listBubble svg path{
+    stroke: orange;
+}
+.listBubble svg{
+    width: 20px;
 }

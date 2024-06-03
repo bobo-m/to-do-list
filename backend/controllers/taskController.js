@@ -61,11 +61,55 @@ const editTaskTitle = async (req, res) => {
     }
 }
 
+const toggleMyDay = async (req, res) => {
+    const { id, myDay } = req.body;
+    try{
+        await Task.updateOne({id: id}, {myDay: !myDay});
+        res.status(200).json({message: 'Task myDay updated successfully'});
+    }catch(error){
+        res.status(500).json({error: error.message});
+    };
+}
+
+const editList = async (req, res) => {
+    const { id, list } = req.body;
+    try{
+        await Task.updateOne({id: id}, {list: list});
+        res.status(200).json({message: 'Task list updated successfully'});
+    }catch(error){
+        res.status(500).json({error: error.message});
+    }
+};
+
+const saveTags = async (req, res) => {
+    const { id, tags } = req.body;
+    try{
+        await Task.updateOne({id: id}, {tags: tags});
+        res.status(200).json({message: 'Task tags updated successfully'});
+    }catch(error){
+        res.status(500).json({error: error.message});
+    };
+};
+
+const editDeadline = async (req, res) => {
+    const { id, deadline } = req.body;
+    try{
+        await Task.updateOne({id: id}, {deadline: deadline});
+        res.status(200).json({message: 'Task deadline updated successfully'});
+    }catch(error){
+        res.status(500).json({error: error.message})
+    };
+}
+
 export {
     getData,
     createTask,
     deleteTask,
     editTaskTitle,
     editTaskNotes,
-    setTaskDone
+    setTaskDone,
+    toggleMyDay,
+    editList,
+    saveTags,
+    editDeadline
 }

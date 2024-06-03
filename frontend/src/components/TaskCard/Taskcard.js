@@ -4,14 +4,27 @@ import { useEffect, useState } from 'react';
 import SubTask from '../SubTask/SubTask';
 import AddSubTask from '../AddSubTask/AddSubTask'
 import NewSubTask from '../NewSubTask/NewSubTask';
+import DateSelection from '../DateSelection/DateSelection';
+import TagSelection from '../TagSelection/TagSelection';
+import ListSelection from '../ListSelection/ListSelection';
 import { StateValue } from '../../context/StateProvider';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import axios from 'axios';
+import TagIcon from '@mui/icons-material/Tag';
+import { ReactComponent as ListIcon } from '../../images/all-tasks.svg';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import { tagColors } from '../../constants/constants';
 
 function TaskCard(){
     const { taskId } = useParams();
     const [{tasks: tasksData}, dispatch] = StateValue(); 
     const { user } = useAuthContext();
+
+    const [dateSelection, setDateSelection] = useState(false);
+    const [tagSelection, setTagSelection] = useState(false);
+    const [listSelection, setListSelection] = useState(false);
+
     // eslint-disable-next-line
     const singleTask = tasksData.find((iterator)=> taskId == iterator.id) 
         || tasksData.find((task)=> task.timeline==='Today') 
@@ -120,7 +133,39 @@ function TaskCard(){
 
             <input type='text' value={title} onChange={(e)=>editTitle(e.target.value)} className="name" />
 
-            {/* <div className="bubbles"></div> */}
+            <div className="bubbles">
+                <div className="reminderBubble">
+                    <button onClick={() => setDateSelection(true)}>
+                        <NotificationsNoneIcon sx={{color: '#ff6168', fontSize: '20px'}}/>
+                        Reminder
+                    </button>
+                </div>
+
+                <div className="listBubble">
+                    <button onClick={() => setListSelection(true)}>
+                        <ListIcon/>
+                        {singleTask.list}
+                    </button>
+                </div>
+                <div 
+                    className={`tagBubbles ${singleTask.tags.length === 0 ? '': 'nextLine'}`}
+                    onClick={() => setTagSelection(true)}
+                >
+                    {singleTask.tags.length === 0 ? 
+                        <button>
+                            <TagIcon sx={{color: '#0083ff'}}/>Tags
+                        </button>:
+                        <>
+                        {singleTask.tags.map((tag)=>(
+                            <button key={tag} className='tag' style={{backgroundColor: tagColors.get(tag)}}>
+                                {tag}
+                            </button>
+                        ))}
+                        <AddCircleOutlineIcon/>
+                        </>
+                        }
+                </div>
+            </div>
 
             <div className="notes">
                 <h5>NOTES</h5>
@@ -143,7 +188,29 @@ function TaskCard(){
             </div>
 
             <div className="attachments"></div>
-        </div>}
+        </div>
+    }
+        {dateSelection &&
+            <DateSelection 
+                taskId={taskId} 
+                taskDeadline={singleTask.deadline} 
+                setDateSelection={setDateSelection}
+            />
+        }
+        {tagSelection && 
+            <TagSelection 
+                taskId={taskId} 
+                tags={singleTask.tags} 
+                setTagSelection={setTagSelection}
+            />
+        }
+        {listSelection && 
+            <ListSelection 
+                taskId={taskId} 
+                taskList={singleTask.list} 
+                setListSelection={setListSelection}
+            />
+        }
         </>
     )
 }

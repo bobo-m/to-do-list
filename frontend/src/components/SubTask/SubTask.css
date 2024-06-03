@@ -1,7 +1,7 @@
 .subtask{
     width: 100%;
     display: flex;
-    background-color: black;
+    background-color: #161616;
     height: 40px;
     align-items: center;
     padding: 5px 10px;
@@ -28,7 +28,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: #161616;
 }
 
 .subtask .subtask-description{

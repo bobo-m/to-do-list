@@ -11,7 +11,7 @@ switch(action.type){
             ...state,
             tasks: action.tasks,
             lists: action.lists,
-        }
+        }        
     case 'addTask':
         const task = {
             id: action.task.id,
@@ -20,7 +20,8 @@ switch(action.type){
             deadline: action.task.deadline,
             list : action.task.list,
             subtasks: [],
-            notes: ''
+            notes: '',
+            myDay: action.task.myDay
         }
             return {
                 ...state,
@@ -52,7 +53,22 @@ switch(action.type){
         }
         return{
             ...state
-        }            
+        }  
+        
+    case 'toggleMyDay':
+        if(action.id){
+            const updatedTasks = [...state.tasks]
+            const taskIndex = updatedTasks.findIndex((task)=> task.id === action.id)
+            console.log(!updatedTasks[taskIndex].myDay);
+            updatedTasks[taskIndex].myDay = !action.myDay;
+            return{
+                ...state,
+                tasks: updatedTasks
+            }
+        }
+        return{
+            ...state
+        }
 
     case 'editTaskTitle':
         if(action.task){
@@ -178,6 +194,48 @@ switch(action.type){
             ...state
         }
 
+    case 'setTaskList':
+        if(action.id){
+            const updatedTasks = [...state.tasks]
+            const taskIndex = updatedTasks.findIndex((task)=> task.id === action.id)
+            updatedTasks[taskIndex].list = action.list
+            return{
+                ...state,
+                tasks: updatedTasks
+            }
+        }
+        return{
+            ...state
+        }
+    
+    case 'saveTags':
+        if(action.id){
+            const updatedTasks = [...state.tasks]
+            const taskIndex = updatedTasks.findIndex((task)=> task.id === action.id)
+            updatedTasks[taskIndex].tags = action.tags
+            return{
+                ...state,
+                tasks: updatedTasks
+            }
+        }
+        return{
+            ...state
+        }
+
+    case 'saveDate':
+        if(action.id){
+            const updatedTasks = [...state.tasks]
+            const taskIndex = updatedTasks.findIndex((task)=> task.id === action.id)
+            updatedTasks[taskIndex].deadline = action.deadline
+            return{
+                ...state,
+                tasks: updatedTasks
+            }
+        }
+
+        return{
+            ...state
+        }
     case 'addList':
         if(action.list){
             const updatedLists = [...state.lists, action.list]
