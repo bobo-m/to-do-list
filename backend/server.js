@@ -7,8 +7,6 @@ import { subtaskRoutes } from './routes/subtasks.js';
 import { userRoutes } from './routes/user.js';
 import { Db } from 'mongodb';
 
-import functions from 'firebase-functions'
-
 const port = process.env.PORT || 5000;
 
 const app = express();
