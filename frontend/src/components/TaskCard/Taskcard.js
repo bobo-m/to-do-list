@@ -148,10 +148,10 @@ function TaskCard(){
                     </button>
                 </div>
                 <div 
-                    className={`tagBubbles ${singleTask.tags.length === 0 ? '': 'nextLine'}`}
+                    className={`tagBubbles ${singleTask.tags && singleTask.tags.length === 0? '': 'nextLine'}`}
                     onClick={() => setTagSelection(true)}
                 >
-                    {singleTask.tags.length === 0 ? 
+                    {(singleTask.tags && singleTask.tags.length === 0) ? 
                         <button>
                             <TagIcon sx={{color: '#0083ff'}}/>Tags
                         </button>:
