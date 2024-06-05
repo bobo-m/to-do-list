@@ -7,6 +7,8 @@ import { subtaskRoutes } from './routes/subtasks.js';
 import { userRoutes } from './routes/user.js';
 import { Db } from 'mongodb';
 
+import functions from 'firebase-functions'
+
 const port = process.env.PORT || 5000;
 
 const app = express();
@@ -22,6 +24,5 @@ app.use('/api/user', userRoutes);
 mongoose.connect(process.env.DB_URI)
 .then(()=>{
     app.listen(port,()=>{
-        console.log(`Port running on http://localhost:${port}/api/tasks`)
     })
-})
+});
