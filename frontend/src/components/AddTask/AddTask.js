@@ -79,7 +79,7 @@ function AddTask({ handleAddTask , date, myDay}){
             tags: [],
         }
         try {
-            await axios.post('/api/tasks', { task: newTask }, {
+            await axios.post('https://task-manager-xsxw.onrender.com/api/tasks', { task: newTask }, {
                 headers:{
                     Authorization: `Bearer ${user.token}`
                 }

@@ -21,7 +21,7 @@ const ListSelection = ({ taskId, taskList, setListSelection }) => {
     }
 
     try{
-      await axios.put('/api/tasks/list',{
+      await axios.put('https://task-manager-xsxw.onrender.com/api/tasks/list',{
         id: taskId,
         list: listName
       },{

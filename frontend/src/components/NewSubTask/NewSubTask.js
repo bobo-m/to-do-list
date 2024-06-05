@@ -24,7 +24,7 @@ export default function NewSubTask({parentTask, setSubtaskInputOpen}){
                 isDone: false
             }
             try {
-                await axios.put('/api/tasks/subtasks',{
+                await axios.put('https://task-manager-xsxw.onrender.com/api/tasks/subtasks',{
                     parentTaskId: parentTask.id,
                     subtask: newSubtask
                 },{

@@ -13,7 +13,7 @@ export const useSignUp = () =>{
 
         // send post request to add user and generate token
         try {
-            const response = await axios.post('/api/user/signup', {email, password}, {
+            const response = await axios.post('https://task-manager-xsxw.onrender.com/api/user/signup', {email, password}, {
                 headers: {
                     "Content-Type": "application/json"
                 }

@@ -54,7 +54,7 @@ function TaskCard(){
         };
 
         try {
-            await axios.put('/api/tasks/notes', {
+            await axios.put('https://task-manager-xsxw.onrender.com/api/tasks/notes', {
                 id: singleTask.id,
                 notes: val
             },{
@@ -87,7 +87,7 @@ function TaskCard(){
         };
 
         try {
-            await axios.put('/api/tasks/title', {
+            await axios.put('https://task-manager-xsxw.onrender.com/api/tasks/title', {
                 id: singleTask.id,
                 title: val
             },{

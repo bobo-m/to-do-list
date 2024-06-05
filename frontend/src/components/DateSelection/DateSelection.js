@@ -98,7 +98,7 @@ const DateSelection = ({taskId, taskDeadline, setDateSelection}) => {
     }
     const newDeadline = mergeDateTime(date, time);
     try{
-      await axios.put('/api/tasks/deadline',{
+      await axios.put('https://task-manager-xsxw.onrender.com/api/tasks/deadline',{
         id: taskId,
         deadline: newDeadline,
       },{

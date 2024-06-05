@@ -27,7 +27,7 @@ export default function Subtask({parentTask, subtask, removeSubtask}){
         };
 
         try {
-            await axios.put('/api/tasks/subtasks/done',{
+            await axios.put('https://task-manager-xsxw.onrender.com/api/tasks/subtasks/done',{
                 parentTaskId: parentTask.id,
                 subtask: {
                     id: subtask.id,
@@ -55,7 +55,7 @@ export default function Subtask({parentTask, subtask, removeSubtask}){
         console.log(id)
 
         try {
-            await axios.delete('/api/tasks/subtasks', {
+            await axios.delete('https://task-manager-xsxw.onrender.com/api/tasks/subtasks', {
                 headers: {
                     Authorization: `Bearer ${user.token}`
                 },
@@ -80,7 +80,7 @@ export default function Subtask({parentTask, subtask, removeSubtask}){
         };
 
         try {
-            await axios.put('/api/tasks/subtasks/title', {
+            await axios.put('https://task-manager-xsxw.onrender.com/api/tasks/subtasks/title', {
                 parentTaskId: parentTask.id,
                 subtask: {
                     id: subtask.id,

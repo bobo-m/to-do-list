@@ -23,7 +23,7 @@ export default function App(){
   useEffect(()=>{
     const fetchTasks = async () =>{
       try {
-        const response = await axios.get('/api/tasks', {
+        const response = await axios.get('https://task-manager-xsxw.onrender.com/api/tasks', {
           headers: {
             Authorization: `Bearer ${user.token}`
           }

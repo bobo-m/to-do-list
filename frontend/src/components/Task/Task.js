@@ -39,7 +39,7 @@ function Task({ task, removeTask }) {
             return;
         }
         try {
-            await axios.put('/api/tasks/done', {
+            await axios.put('https://task-manager-xsxw.onrender.com/api/tasks/done', {
                 id: task.id,
                 isDone: !done
             }, {
@@ -68,7 +68,7 @@ function Task({ task, removeTask }) {
             return;
         };
         try {
-            await axios.delete('/api/tasks', {
+            await axios.delete('https://task-manager-xsxw.onrender.com/api/tasks', {
                 headers: {
                     Authorization: `Bearer ${user.token}`,
                     "Content-Type": "application/json",
@@ -110,7 +110,7 @@ function Task({ task, removeTask }) {
         };
 
         try {
-            await axios.put('/api/tasks/myday', {
+            await axios.put('https://task-manager-xsxw.onrender.com/api/tasks/myday', {
                 id: task.id,
                 myDay: task.myDay
             }, {

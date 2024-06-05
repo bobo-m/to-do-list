@@ -34,7 +34,7 @@ const TagSelection = ({taskId, tags ,setTagSelection}) => {
     }
 
     try{
-      await axios.put('/api/tasks/tags', {
+      await axios.put('/https://task-manager-xsxw.onrender.comapi/tasks/tags', {
         id: taskId,
         tags: checkedTags
       },{
