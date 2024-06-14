@@ -4,9 +4,11 @@ import { StateValue } from '../../context/StateProvider.js';
 import AddTask from '../AddTask/AddTask.js';
 import Task from '../Task/Task.js';
 import { Outlet } from 'react-router-dom';
+import { useAuthContext } from '../../hooks/useAuthContext.js';
 
 const MyDay = () => {
   const [tasks, dispatch] = StateValue();
+  const { user } = useAuthContext();
   const date = new Date();
   
   const addTask = (task) => {
@@ -29,10 +31,10 @@ const MyDay = () => {
     <div className="myDayWrapper">
       <div className="myDay">
         <h2 className="greeting">
-          Good Evening Bob
+          Good Day {user.name}.
         </h2>
         <h2 className="quote">
-          Run the day or the day will run you
+          Run the day or the day will run you.
         </h2>
         <div className="eventsOverview">
           <div className="myDay-day">

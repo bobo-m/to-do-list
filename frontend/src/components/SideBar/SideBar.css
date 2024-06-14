@@ -43,3 +43,29 @@ ul{
     display: flex;
     align-items: center;
 }
+.myLists-list{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    position: relative;
+}
+.myLists-list:hover{
+    background-color: rgb(88, 87, 87);
+}
+.sidebar .popperWrapper{
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    z-index: 4;
+}
+.sidebar .listOptions{
+    position: relative;
+    right: 20px;
+    bottom: 10px;
+}

@@ -7,13 +7,13 @@ export const useSignUp = () =>{
     const [isLoading, setIsLoading] = useState(null);
     const { dispatch } = useAuthContext();
 
-    const signup = async (email, password)=>{
+    const signup = async (name, email, password)=>{
         setIsLoading(true);
         setError(null);
 
         // send post request to add user and generate token
         try {
-            const response = await axios.post('https://task-manager-xsxw.onrender.com/api/user/signup', {email, password}, {
+            const response = await axios.post('https://task-manager-xsxw.onrender.com/api/user/signup', {name, email, password}, {
                 headers: {
                     "Content-Type": "application/json"
                 }

@@ -7,7 +7,8 @@ import {
     editTaskTitle,
     setTaskDone,
     toggleMyDay,
-    editList,
+    addList,
+    deleteList,
     saveTags,
     editDeadline    
 } from '../controllers/taskController.js';
@@ -31,7 +32,9 @@ router.put('/title', editTaskTitle);
 
 router.put('/myday', toggleMyDay);
 
-router.put('/list', editList);
+router.put('/list', addList);
+
+router.delete('/list', deleteList);
 
 router.put('/tags', saveTags);
 

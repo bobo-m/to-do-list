@@ -6,7 +6,7 @@ import { tagsList } from "../../constants/constants";
 import axios from "axios";
 import './TagSelection.css';
 
-const TagSelection = ({taskId, tags ,setTagSelection}) => {
+const TagSelection = ({taskId, tags ,setTagSelection, setNewTags}) => {
   const [checkedTags, setCheckedTags] = useState(tags);
   const [,dispatch ] = StateValue();
   const { user } = useAuthContext();
@@ -57,6 +57,11 @@ const TagSelection = ({taskId, tags ,setTagSelection}) => {
     };
   };
 
+  const selectTags = () =>{
+    setNewTags(checkedTags);
+    setTagSelection(false);
+  }
+
   return(
     <div className="tagSelectionWrapper" onClick={(e)=> closeTagMenu(e)}>
       <div className="tagSelection">
@@ -89,7 +94,7 @@ const TagSelection = ({taskId, tags ,setTagSelection}) => {
         <div className="tagSelection-footer">
           <button className='cancel-button' onClick={() => setTagSelection(false)}>Cancel</button>
           <hr/>
-          <button className='saveTags-button' onClick={saveTags}>Save</button>
+          <button className='saveTags-button' onClick={!setNewTags ? saveTags : selectTags}>Save</button>
         </div>
       </div>
     </div>

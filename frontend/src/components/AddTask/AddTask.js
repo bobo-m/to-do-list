@@ -3,14 +3,14 @@ import { useEffect, useState } from 'react';
 import { useAuthContext } from '../../hooks/useAuthContext';
 import axios from 'axios';
 import { v1 as uuid } from 'uuid';
-import { format } from 'date-fns'
 import TagIcon from '@mui/icons-material/Tag';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
-import { parse, isToday, isTomorrow, isThisMonth } from 'date-fns';
 import './AddTask.css'
 import { StateValue } from '../../context/StateProvider'
+import DateSelection from '../DateSelection/DateSelection';
+import TagSelection from '../TagSelection/TagSelection';
 
 function AddTask({ handleAddTask , date, myDay}){
     const [title, setTitle] = useState('')
@@ -20,6 +20,12 @@ function AddTask({ handleAddTask , date, myDay}){
     const [selectedList, setSelectedList] = useState('');
     const { user } = useAuthContext();
     const [{lists}] = StateValue();
+
+    const [tags, setTags] = useState([]);
+    const [deadline, setDeadline] = useState(date ? date : new Date());
+
+    const [dateSelection, setDateSelection] = useState(false);
+    const [tagSelection, setTagSelection] = useState(false);
 
     const handleWindowClick=(e)=>{
         const addTaskElement = document.querySelector('.addtask-container');
@@ -46,6 +52,14 @@ function AddTask({ handleAddTask , date, myDay}){
     const openListSelect =()=>{
         setShowListSelect(!showListSelect);
     }
+
+    const openDateSelect =()=>{
+        setDateSelection(true);
+    }
+
+    const openTagSelect = () =>{
+        setTagSelection(true)
+    }
     const handleChange = (e) =>{
         setTitle(e.target.value)
     }
@@ -63,10 +77,7 @@ function AddTask({ handleAddTask , date, myDay}){
         if(!user){
             return;
         }
-
         const id = uuid();
-        const deadline = date? date :format(Date.now(), 'yyyy-MM-dd');
-        const parsedDate = parse(deadline, 'yyyy-MM-dd', new Date()) ;  
         const newTask = {
             id:id,
             title: title,
@@ -76,16 +87,18 @@ function AddTask({ handleAddTask , date, myDay}){
             subtasks: [],  
             isDone: false,
             myDay: myDay,
-            tags: [],
+            tags: tags.length !== 0 ? tags : [],
         }
+        setTags([]);
+        setDeadline(date ? date : new Date());
         try {
+            handleAddTask(newTask)
+            setTitle('');
             await axios.post('https://task-manager-xsxw.onrender.com/api/tasks', { task: newTask }, {
                 headers:{
                     Authorization: `Bearer ${user.token}`
                 }
             })
-            handleAddTask(newTask)
-            setTitle('');
         } catch (error) {
             if(error.response){
                 console.log(error.response.data);
@@ -117,11 +130,11 @@ function AddTask({ handleAddTask , date, myDay}){
                         {selectedList !== '' ? selectedList:<MyListIcon/>}
                     </button>
                     <hr/>
-                    <button className="addtask-options-reminder">
+                    <button onClick={openDateSelect} className="addtask-options-reminder">
                         <NotificationsOutlinedIcon style={{fontWeight:'300'}}/>
                     </button>
                     <hr/>
-                    <button className='addtask-options-tags'>
+                    <button onClick={openTagSelect}  className='addtask-options-tags'>
                         <TagIcon style={{fontWeight:'300'}}/>
                     </button>
                 </div>
@@ -145,6 +158,8 @@ function AddTask({ handleAddTask , date, myDay}){
                 }
             </div> 
         </div>
+        {dateSelection && <DateSelection taskDeadline={deadline} setDateSelection={setDateSelection} setNewDeadline={setDeadline}/>}
+        {tagSelection && <TagSelection setTagSelection={setTagSelection} tags={tags} setNewTags={setTags}/>}
         </div>
     )
 }

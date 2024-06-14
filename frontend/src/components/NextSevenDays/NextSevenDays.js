@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import Header from '../Header/Header'
 import DayTaskList from '../DayTaskList/DayTaskList';
 import { StateValue } from '../../context/StateProvider'
-import { parse, differenceInCalendarDays } from 'date-fns';
+import { differenceInCalendarDays } from 'date-fns';
 import './NextSevenDays.css';
 import { Outlet } from 'react-router-dom';
 

@@ -7,6 +7,7 @@ export const initialState = {
 const reducer = (state, action) =>{
 switch(action.type){
     case 'SET_DATA':
+        
         return{
             ...state,
             tasks: action.tasks,
@@ -16,12 +17,12 @@ switch(action.type){
         const task = {
             id: action.task.id,
             title: action.task.title,
-            timeline: action.task.timeline,
             deadline: action.task.deadline,
             list : action.task.list,
             subtasks: [],
             notes: '',
-            myDay: action.task.myDay
+            myDay: action.task.myDay,
+            tags: action.task.tags
         }
             return {
                 ...state,
@@ -244,6 +245,21 @@ switch(action.type){
                 lists: updatedLists
             }
         }
+        return {
+            ...state
+        }
+
+    case 'deleteList':
+        console.log(action)
+        if(action.id){
+            const updatedLists = [...state.lists].filter((l)=>l._id !== action.id);
+            const updatedTasks = [...state.tasks].filter((t)=>t.list !== action.name);
+            return {
+                ...state,
+                lists: updatedLists,
+                tasks: updatedTasks
+            }
+        };
         return {
             ...state
         }

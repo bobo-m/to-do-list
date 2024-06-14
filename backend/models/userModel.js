@@ -5,6 +5,10 @@ import validator from 'validator';
 const schema = mongoose.Schema;
 
 const userSchema = new schema({
+    name:{
+        type: String,
+        required: true
+    },
     email:{
         type: String,
         required: true,
@@ -17,8 +21,8 @@ const userSchema = new schema({
 },{collection: 'users'})
 
 // static signup method
-userSchema.statics.signup = async function(email, password){
-    if(!email || !password){
+userSchema.statics.signup = async function(name, email, password){
+    if(!email || !password || !name){
         throw new Error('All fields must be filled');
     };
 
@@ -26,7 +30,6 @@ userSchema.statics.signup = async function(email, password){
         throw new Error('Email is not valid');
     };
     const exists = await this.findOne({ email:email });
-    console.log(exists)
     
     if(exists){
         throw new  Error('Email already in use');
@@ -40,7 +43,7 @@ userSchema.statics.signup = async function(email, password){
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    const user = await this.create({ email, password: hashedPassword});
+    const user = await this.create({name, email, password: hashedPassword});
 
     return user;
 }

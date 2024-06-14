@@ -2,7 +2,7 @@ import React from 'react';
 import './Profile.css'
 import SettingsIcon from '@mui/icons-material/Settings';
 
-function Profile({sidebarStatus, handleSidebarToggle}){
+function Profile({name, sidebarStatus, handleSidebarToggle}){
     const handleClick=()=>{
         handleSidebarToggle(!sidebarStatus);
     }
@@ -11,7 +11,7 @@ function Profile({sidebarStatus, handleSidebarToggle}){
             <button onClick={handleClick} className="settings-icon">
                 <SettingsIcon sx={{fontSize: 30, color:'white'}}/>
             </button>
-            {sidebarStatus && <p className="username">Bob Murmu</p>}
+            {sidebarStatus && <p className="username">{name}</p>}
         </div>
     )
 }

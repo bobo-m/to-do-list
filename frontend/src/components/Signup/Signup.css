@@ -28,7 +28,7 @@
     text-align: center;
 }
 
-.password::placeholder, .email::placeholder{
+.name::placeholder .password::placeholder, .email::placeholder{
     font-style: italic;
     font-family: 'Poppins', sans-serif;
 }

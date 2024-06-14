@@ -24,5 +24,6 @@ app.use('/api/user', userRoutes);
 mongoose.connect(process.env.DB_URI)
 .then(()=>{
     app.listen(port,()=>{
+        console.log(`http://localhost:${port}`);
     })
 });

@@ -71,15 +71,30 @@ const toggleMyDay = async (req, res) => {
     };
 }
 
-const editList = async (req, res) => {
-    const { id, list } = req.body;
+const addList = async (req, res) => {
+    const { list } = req.body;
+    const user_id = req.user._id;
     try{
-        await Task.updateOne({id: id}, {list: list});
-        res.status(200).json({message: 'Task list updated successfully'});
+        const newList = new List({name: list, user_id: user_id});
+        await newList.save();
+        res.status(200).json({message: 'List Created successfully'});
     }catch(error){
         res.status(500).json({error: error.message});
     }
 };
+
+const deleteList = async (req, res) => {
+    const { id, name } = req.body;
+    const user_id = req.user._id;
+    try {
+        List.findById(id)
+        await List.findById(id).deleteOne();
+        await Task.deleteMany({list: name, user_id});
+        res.status(200).json({message: 'List deleted successfully'});
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+}
 
 const saveTags = async (req, res) => {
     const { id, tags } = req.body;
@@ -109,7 +124,8 @@ export {
     editTaskNotes,
     setTaskDone,
     toggleMyDay,
-    editList,
+    addList,
+    deleteList,
     saveTags,
     editDeadline
 }

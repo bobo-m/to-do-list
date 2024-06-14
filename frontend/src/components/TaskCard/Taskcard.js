@@ -26,11 +26,7 @@ function TaskCard(){
     const [listSelection, setListSelection] = useState(false);
 
     // eslint-disable-next-line
-    const singleTask = tasksData.find((iterator)=> taskId == iterator.id) 
-        || tasksData.find((task)=> task.timeline==='Today') 
-        || tasksData.find((task)=> task.timeline==='Tomorrow')
-        || tasksData.find((task)=> task.timeline==='Upcoming')
-        || tasksData.find((task)=> task.timeline==='Someday')
+    const singleTask = tasksData.find((iterator)=> taskId == iterator.id); 
 
     const defaultNotes = singleTask?.notes || '';
     const defaultTitle = singleTask?.title || '';
@@ -40,7 +36,6 @@ function TaskCard(){
     const [title, setTitle] = useState(defaultTitle);
     const [subTasks, setSubTasks] = useState(defaultSubTasks);
     const [subtaskInputOpen, setSubtaskInputOpen] = useState(false);
-
 
     useEffect(()=>{
         setNotes((prevNotes) => singleTask?.notes || prevNotes);
@@ -54,15 +49,6 @@ function TaskCard(){
         };
 
         try {
-            await axios.put('https://task-manager-xsxw.onrender.com/api/tasks/notes', {
-                id: singleTask.id,
-                notes: val
-            },{
-                headers: {
-                    Authorization: `Bearer ${user.token}`
-                }
-            });
-            
             dispatch({
                 type: 'editTaskNotes',
                 task: {
@@ -72,6 +58,17 @@ function TaskCard(){
             });
 
             setNotes(val);
+            
+            await axios.put('https://task-manager-xsxw.onrender.com/api/tasks/notes', {
+                id: singleTask.id,
+                notes: val
+            },{
+                headers: {
+                    Authorization: `Bearer ${user.token}`
+                }
+            });
+            
+
         } catch (error) {
             if(error.response){
                 console.log(error.response.data);
@@ -87,6 +84,16 @@ function TaskCard(){
         };
 
         try {
+            dispatch({
+                type: 'editTaskTitle',
+                task: {
+                    title: val,
+                    id: singleTask.id
+                }
+            });
+
+            setTitle(val);
+
             await axios.put('https://task-manager-xsxw.onrender.com/api/tasks/title', {
                 id: singleTask.id,
                 title: val
@@ -95,16 +102,6 @@ function TaskCard(){
                     Authorization: `Bearer ${user.token}`
                 }
             });
-    
-            dispatch({
-                type: 'editTaskTitle',
-                task: {
-                    title: val,
-                    id: singleTask.id
-                }
-            });
-            
-            setTitle(val);
         } catch (error) {
             if(error.response){
                 console.log(error.response.data);
@@ -151,7 +148,9 @@ function TaskCard(){
                     className={`tagBubbles ${singleTask.tags && singleTask.tags.length === 0? '': 'nextLine'}`}
                     onClick={() => setTagSelection(true)}
                 >
-                    {(singleTask.tags && singleTask.tags.length === 0) ? 
+                    {(singleTask.tags &&
+                    <>
+                    {(singleTask.tags.length === 0) ? 
                         <button>
                             <TagIcon sx={{color: '#0083ff'}}/>Tags
                         </button>:
@@ -164,6 +163,8 @@ function TaskCard(){
                         <AddCircleOutlineIcon/>
                         </>
                         }
+                        </>
+                    )}
                 </div>
             </div>
 

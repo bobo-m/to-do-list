@@ -6,7 +6,7 @@ import { format, isPast, parse } from 'date-fns';
 import axios from 'axios';
 import './DateSelection.css';
 
-const DateSelection = ({taskId, taskDeadline, setDateSelection}) => {
+const DateSelection = ({taskId, taskDeadline, setDateSelection, setNewDeadline}) => {
   const [date, setDate] = useState(new Date(taskDeadline));
   const [time, setTime] = useState(new Date(taskDeadline));
 
@@ -121,6 +121,12 @@ const DateSelection = ({taskId, taskDeadline, setDateSelection}) => {
     }
   }
 
+  const setDeadline = () => {
+    const newDeadline = mergeDateTime(date, time);
+    setNewDeadline(newDeadline);
+    setDateSelection(false);
+  }
+
   return(
     <div className="dateSelectionWrapper" onClick={closeDateSelection}>
       <div className="dateSelection">
@@ -170,7 +176,7 @@ const DateSelection = ({taskId, taskDeadline, setDateSelection}) => {
             Cancel
           </button>
           <hr/>
-          <button className="saveDate-button" onClick={editDeadline}>
+          <button className="saveDate-button" onClick={setNewDeadline ? setDeadline : editDeadline}>
             Save
           </button>
         </div>

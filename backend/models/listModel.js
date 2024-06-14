@@ -5,7 +5,6 @@ const schema = mongoose.Schema;
 const listSchema = new schema({
     name:{
         type: String,
-        unique: true,
         required: true
     },
     user_id:{

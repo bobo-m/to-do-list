@@ -1,26 +1,46 @@
 import { useState } from 'react'
 import './AddList.css'
 import { StateValue } from '../../context/StateProvider'
-import { v1 as uuid } from 'uuid'
+import { useAuthContext } from '../../hooks/useAuthContext'
+import axios from 'axios'
 
 const AddList = ({ closeAddList }) => {
     // eslint-disable-next-line
     const [state, dispatch] = StateValue()
     const [value, setValue] = useState('')
 
+    const { user } = useAuthContext();
+
     const handleChange = (val) => {
         setValue(val)
     }
-    const addList = () => {
-        dispatch({
-            type: 'addList',
-            list: {
-                id: uuid(),
-                name: value
+    const addList = async() => {
+        if(!user){
+            return;
+        }
+        try{
+            dispatch({
+                type: 'addList',
+                list: {
+                    name: value
+                }
+            });
+            setValue('')
+            closeAddList(false)
+            await axios.put('https://task-manager-xsxw.onrender.com/api/tasks/list',{
+                list: value
+            },{
+                headers:{
+                    Authorization: `Bearer ${user.token}`
+                }
+            });
+        }catch(error){
+            if(error.response){
+                console.log(error.response.data);
+            }else{
+                console.log(error)
             }
-        })
-        setValue('')
-        closeAddList(false)
+        }
     }
     const hideAddListClose=(e)=>{
         const addListElement = document.querySelector('.addlist')

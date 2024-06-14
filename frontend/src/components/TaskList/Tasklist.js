@@ -5,12 +5,13 @@ import AddTask from '../AddTask/AddTask';
 import { useEffect, useState } from 'react';
 import { StateValue } from '../../context/StateProvider';
 import Header from '../Header/Header';
-import { differenceInCalendarDays, isToday, isTomorrow } from 'date-fns';
+import { differenceInCalendarDays, isPast, isToday, isTomorrow } from 'date-fns';
 
 export default function TaskList(){
     // eslint-disable-next-line
     const[{tasks : taskList}, dispatch] = StateValue();
     const [categorizedTasks, setCategorizedTasks] = useState({
+        past:[],
         today: [],
         tomorrow: [],
         upcoming: [],
@@ -21,7 +22,9 @@ export default function TaskList(){
         const categorized = taskList.reduce(
             (acc, task)=>{
                 const date = task.deadline;
-                if(isToday(date)){
+                if(isPast(date)){
+                    acc.past.push(task)
+                }else if(isToday(date)){
                     acc.today.push(task);
                 }else if(isTomorrow(date)){
                     acc.tomorrow.push(task);
@@ -32,11 +35,12 @@ export default function TaskList(){
                 }
                 return acc;
             },
-            {today:[], tomorrow:[], upcoming:[], someday:[]}
+            {past:[], today:[], tomorrow:[], upcoming:[], someday:[]}
         );
         setCategorizedTasks(categorized);
     },[taskList])
-
+    console.log(categorizedTasks)
+    
     const addTask = (task) => {
         dispatch({
             type: 'addTask',
@@ -61,6 +65,9 @@ export default function TaskList(){
                     </div>
                     <div className="tasklist tasklist-someday">
                         <TaskTitle name='someday' tasks={categorizedTasks.someday}/>
+                    </div>
+                    <div className='tasklist taklist-past'>
+                        <TaskTitle name='past' tasks={categorizedTasks.past}/>
                     </div>
                 </div>
                 <AddTask handleAddTask={addTask} myDay={false}/> 
